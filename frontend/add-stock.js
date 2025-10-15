@@ -1,5 +1,6 @@
 // ==================== Configuration ====================
-const API_BASE_URL = 'http://localhost:3000';
+// ใช้ relative URL เพื่อให้ทำงานได้ทั้ง local และ production
+const API_BASE_URL = window.location.origin;
 
 // ==================== DOM Elements ====================
 const addStockForm = document.getElementById('addStockForm');
@@ -92,7 +93,14 @@ addStockForm.addEventListener('submit', async (e) => {
     }
   } catch (error) {
     console.error('Error adding stock:', error);
-    showToast('❌ เกิดข้อผิดพลาดในการเพิ่มหุ้น', 'error');
+    let errorMessage = '❌ เกิดข้อผิดพลาดในการเพิ่มหุ้น';
+    
+    // แสดง error message ที่เป็นประโยชน์มากขึ้น
+    if (error.message === 'Failed to fetch') {
+      errorMessage = '❌ ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต';
+    }
+    
+    showToast(errorMessage, 'error');
     submitBtn.textContent = originalText;
     submitBtn.disabled = false;
   }

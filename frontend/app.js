@@ -1,5 +1,6 @@
 // ==================== Configuration ====================
-const API_BASE_URL = 'http://localhost:3000';
+// ใช้ relative URL เพื่อให้ทำงานได้ทั้ง local และ production
+const API_BASE_URL = window.location.origin;
 const UPDATE_INTERVAL = 30000; // 30 วินาที (ลด rate limiting)
 
 // ==================== State ====================
