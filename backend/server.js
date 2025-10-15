@@ -6,9 +6,7 @@ const { getStockPrices } = require('./services/yahooService');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Running on http://localhost:${PORT}`);
-});
+const STOCKS_FILE = path.join(__dirname, 'stocks.json');
 
 // Middleware
 app.use(cors());
