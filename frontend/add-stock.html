@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>➕ เพิ่มหุ้นใหม่ - Stock Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📈 Stock Tracker</h1>
+            <p>เพิ่มหุ้นใหม่เข้าระบบติดตาม</p>
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-secondary">← กลับหน้าหลัก</a>
+            </div>
+        </header>
+
+        <!-- Add Stock Form -->
+        <section class="add-stock-section">
+            <h2>➕ เพิ่มหุ้นใหม่</h2>
+            <form id="addStockForm" class="add-stock-form">
+                <div class="form-group">
+                    <label for="symbol">
+                        <span class="label-text">ชื่อหุ้น (Ticker)</span>
+                        <span class="label-hint">เช่น AAPL, TSLA, GOOGL, MSFT</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="symbol" 
+                        name="symbol" 
+                        placeholder="AAPL" 
+                        required 
+                        autocomplete="off"
+                        style="text-transform: uppercase;">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span class="label-text">แนวรับ (Support Levels)</span>
+                        <button type="button" id="addSupportBtn" class="btn-add-support">+ เพิ่มแนวรับ</button>
+                    </label>
+                    <div id="supportLevelsContainer" class="support-levels-container">
+                        <div class="support-level-item">
+                            <input 
+                                type="number" 
+                                step="0.01" 
+                                class="support-input" 
+                                placeholder="150.00" 
+                                required>
+                            <button type="button" class="btn-remove-support" onclick="removeSupportLevel(this)">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">💾 บันทึก</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='index.html'">
+                        ยกเลิก
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="add-stock.js"></script>
+</body>
+</html>

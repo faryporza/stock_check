@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📈 Stock Tracker - ระบบติดตามหุ้นเชิงเทคนิค</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📈 Stock Tracker</h1>
+            <p>ระบบติดตามหุ้นเชิงเทคนิคแบบเรียลไทม์</p>
+            <div class="header-actions">
+                <div class="last-update">
+                    อัปเดตล่าสุด: <span id="lastUpdate">-</span>
+                </div>
+                <a href="add-stock.html" class="btn btn-primary">➕ เพิ่มหุ้นใหม่</a>
+            </div>
+        </header>
+
+        <!-- Stock List Section -->
+        <section class="stock-list-section">
+            <div class="section-header">
+                <h2>📊 รายการหุ้นที่ติดตาม</h2>
+                <div class="stats">
+                    <span class="stat-item">จำนวน: <strong id="stockCount">0</strong> หุ้น</span>
+                    <button id="refreshBtn" class="btn btn-secondary btn-small">🔄 รีเฟรช</button>
+                </div>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-filter-section">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="🔍 ค้นหาหุ้น (Symbol หรือชื่อ)..." 
+                        autocomplete="off">
+                    <button id="clearSearchBtn" class="btn-clear-search" style="display: none;">×</button>
+                </div>
+                <div class="filter-options">
+                    <select id="sortSelect" class="filter-select">
+                        <option value="distance">เรียงตาม: ใกล้แนวรับที่สุด</option>
+                        <option value="symbol">เรียงตาม: ชื่อหุ้น (A-Z)</option>
+                        <option value="price-high">เรียงตาม: ราคาสูงสุด</option>
+                        <option value="price-low">เรียงตาม: ราคาต่ำสุด</option>
+                    </select>
+                    <select id="perPageSelect" class="filter-select">
+                        <option value="5">แสดง 5 รายการ</option>
+                        <option value="10" selected>แสดง 10 รายการ</option>
+                        <option value="20">แสดง 20 รายการ</option>
+                        <option value="50">แสดง 50 รายการ</option>
+                        <option value="all">แสดงทั้งหมด</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="stocksContainer" class="stocks-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>กำลังโหลดข้อมูล...</p>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div id="paginationContainer" class="pagination-container" style="display: none;">
+                <button id="firstPageBtn" class="btn btn-pagination">« แรก</button>
+                <button id="prevPageBtn" class="btn btn-pagination">‹ ก่อนหน้า</button>
+                <div class="page-info">
+                    <span id="pageInfo">หน้า 1 จาก 1</span>
+                </div>
+                <button id="nextPageBtn" class="btn btn-pagination">ถัดไป ›</button>
+                <button id="lastPageBtn" class="btn btn-pagination">สุดท้าย »</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
