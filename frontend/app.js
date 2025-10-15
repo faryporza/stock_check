@@ -8,7 +8,7 @@ let allStocks = []; // เก็บข้อมูลหุ้นทั้งห
 let filteredStocks = []; // เก็บข้อมูลหลังค้นหา/กรอง
 let currentPage = 1;
 let itemsPerPage = 10;
-let currentSort = 'distance';
+let currentSort = 'distance-baht'; // เริ่มต้นด้วยระยะห่างเป็นบาท
 let searchQuery = '';
 
 // ==================== DOM Elements ====================
@@ -57,11 +57,20 @@ function applyFilters() {
   
   // เรียงลำดับ
   switch (currentSort) {
-    case 'distance':
+    case 'distance-baht':
+      // เรียงตามระยะห่างเป็นบาท (เหมาะกับหุ้นราคาใกล้เคียงกัน)
       filteredStocks.sort((a, b) => {
         if (a.distanceToNearestSupport === null) return 1;
         if (b.distanceToNearestSupport === null) return -1;
         return Math.abs(a.distanceToNearestSupport) - Math.abs(b.distanceToNearestSupport);
+      });
+      break;
+    case 'distance-percent':
+      // เรียงตามระยะห่างเป็น % (เหมาะกับการเปรียบเทียบหุ้นหลายราคา)
+      filteredStocks.sort((a, b) => {
+        if (a.distancePercent === null || a.distancePercent === undefined) return 1;
+        if (b.distancePercent === null || b.distancePercent === undefined) return -1;
+        return Math.abs(parseFloat(a.distancePercent)) - Math.abs(parseFloat(b.distancePercent));
       });
       break;
     case 'symbol':
@@ -310,6 +319,28 @@ async function deleteStock(symbol) {
   }
 }
 
+// ==================== Sort Hint ====================
+function updateSortHint(sortType) {
+  const sortHint = document.getElementById('sortHint');
+  if (!sortHint) return;
+  
+  const hints = {
+    'distance-baht': '💡 <strong>ระยะห่างเป็นราคา:</strong> เหมาะกับคนที่ตั้งแนวรับแบบ “เป็นราคาเป๊ะ ๆ” เช่น ซื้อเมื่อราคาลงมา 1',
+    'distance-percent': '💡 <strong>ระยะห่างเป็น %:</strong> เหมาะสำหรับเปรียบเทียบหุ้นหลายตัว ที่มีราคาต่างกันมาก เห็นความใกล้จริง',
+    'symbol': '',
+    'price-high': '',
+    'price-low': ''
+  };
+  
+  const hint = hints[sortType];
+  if (hint) {
+    sortHint.innerHTML = hint;
+    sortHint.style.display = 'block';
+  } else {
+    sortHint.style.display = 'none';
+  }
+}
+
 // ==================== Helper Functions ====================
 function formatNumber(num) {
   if (num === null || num === undefined) return '-';
@@ -372,7 +403,13 @@ clearSearchBtn.addEventListener('click', () => {
 // Sort
 sortSelect.addEventListener('change', (e) => {
   currentSort = e.target.value;
+  updateSortHint(currentSort);
   applyFilters();
+});
+
+// แสดง hint เมื่อโหลดหน้า
+document.addEventListener('DOMContentLoaded', () => {
+  updateSortHint(currentSort);
 });
 
 // Items per page

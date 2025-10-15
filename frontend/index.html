@@ -41,11 +41,12 @@
                     <button id="clearSearchBtn" class="btn-clear-search" style="display: none;">×</button>
                 </div>
                 <div class="filter-options">
-                    <select id="sortSelect" class="filter-select">
-                        <option value="distance">เรียงตาม: ใกล้แนวรับที่สุด</option>
-                        <option value="symbol">เรียงตาม: ชื่อหุ้น (A-Z)</option>
-                        <option value="price-high">เรียงตาม: ราคาสูงสุด</option>
-                        <option value="price-low">เรียงตาม: ราคาต่ำสุด</option>
+                    <select id="sortSelect" class="filter-select" title="เลือกวิธีการเรียงลำดับ">
+                        <option value="distance-baht">📊 ระยะห่างแนวรับ (ราคา) - ดูตัวเลขจริง</option>
+                        <option value="distance-percent">📈 ระยะห่างแนวรับ (%) - เปรียบเทียบหลายหุ้น</option>
+                        <option value="symbol">🔤 ชื่อหุ้น (A-Z)</option>
+                        <option value="price-high">💰 ราคาสูงสุด</option>
+                        <option value="price-low">💸 ราคาต่ำสุด</option>
                     </select>
                     <select id="perPageSelect" class="filter-select">
                         <option value="5">แสดง 5 รายการ</option>
@@ -55,6 +56,7 @@
                         <option value="all">แสดงทั้งหมด</option>
                     </select>
                 </div>
+                <div class="filter-hint" id="sortHint" style="display: none;"></div>
             </div>
 
             <div id="stocksContainer" class="stocks-container">
