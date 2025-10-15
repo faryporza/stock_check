@@ -1,6 +1,6 @@
 // ==================== Configuration ====================
 // ใช้ relative URL เพื่อให้ทำงานได้ทั้ง local และ production
-const API_BASE_URL = window.location.origin;
+const API_BASE_URL = 'https://external-elna-farypor-2a4f6992.koyeb.app';
 
 // ==================== DOM Elements ====================
 const addStockForm = document.getElementById('addStockForm');
