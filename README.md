@@ -65,4 +65,5 @@ stock-tracker/
 - 🌙 Dark Mode
 - 💾 Database (SQLite/MongoDB)
 - 🔐 User Authentication
-# stock_check
+
+
