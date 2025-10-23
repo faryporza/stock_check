@@ -1,6 +1,6 @@
 // ==================== Configuration ====================
 // ใช้ relative URL เพื่อให้ทำงานได้ทั้ง local และ production
-const API_BASE_URL = 'https://external-elna-farypor-2a4f6992.koyeb.app';
+const API_BASE_URL = window.location.origin;
 const UPDATE_INTERVAL = 30000; // 30 วินาที (ลด rate limiting)
 
 // ==================== State ====================
